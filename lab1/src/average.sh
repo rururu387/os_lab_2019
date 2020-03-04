@@ -1,15 +1,15 @@
 #!/bin/bash
 for (( a = 1; a < 150; a++ ))
 do
-    /dev/urandom>number
-    echo $number
+    echo $RANDOM
 done > numbers.txt
 
-average=0
-cnt=0
-while read number
+let average=0
+let cnt=0
+
+while IFS= read -r number;
 do
-average=average+number
-cnt++
-done
-echo average/cnt
+average=$((average + $number))
+cnt=$((cnt + 1))
+done < numbers.txt
+echo $((average / cnt))
