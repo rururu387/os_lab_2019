@@ -1,15 +1,18 @@
 #!/bin/bash
-for (( a = 1; a < 150; a++ ))
+let cnt2=0
+let a
+for (( cnt2 = 1; cnt2 <= 150; cnt2++ ))
 do
-    echo $RANDOM
-done > numbers.txt
-
+a="$a $RANDOM"
+done
+echo $a > numbers.txt
 let average=0
 let cnt=0
-
-while IFS= read -r number;
+while (($# > 0))
 do
-average=$((average + $number))
-cnt=$((cnt + 1))
-done < numbers.txt
+let num=$1
+average=$((average+num))
+cnt=$((cnt+1))
+shift
+done
 echo $((average / cnt))
