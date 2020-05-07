@@ -8,11 +8,11 @@
             "name": "gcc - Сборка и отладка активного файла",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/lab4Output",
-            "args": ["--seed", "10", "--array_size", "20", "--pnum", "3", "--timeout", "10"],
+            "program": "${fileDirname}/lab4Task5",
+            "args": ["--seed", "10", "--array_size", "20", "--threads_num", "3"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            /*"environment": [],
+            "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -22,8 +22,8 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build active file",
-            "miDebuggerPath": "/usr/bin/gdb"*/
+            //"preLaunchTask": "gcc build active file",
+            //"miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }
