@@ -5,34 +5,9 @@
 #include "../../lab3/src/utils.h"
 #include <stdbool.h>
 #include <sys/time.h>
-
+#include "sum.h"
 #include <pthread.h>
 
-struct SumArgs
-{
-	int *array;
-	int begin;
-	int end;
-};
-
-long long int Sum(const struct SumArgs *args)
-{
-	long long int sum = 0;
-	// TODO: your code here 
-	
-	for (int i = args->begin; i < args->end; i++)
-	{
-		sum += args->array[i];
-	}
-
-	return sum;
-}
-
-void *ThreadSum(void *args)
-{
-	struct SumArgs *sum_args = (struct SumArgs *)args;
-	return (void *)(long long int)Sum(sum_args);
-}
 
 int main(int argc, char **argv)
 {
@@ -83,9 +58,9 @@ int main(int argc, char **argv)
 					case 2:
 					{
 						threads_num = atoi(optarg);
-						if (threads_num < 0)
+						if (threads_num <= 0)
 						{
-								printf("Array_size must be a positive number. Now array_size is %d\n", threads_num);
+								printf("Threads_num must be 1 or more. Now threads_num is %d\n", threads_num);
 								return -1;
 						}
 						break;
@@ -100,6 +75,11 @@ int main(int argc, char **argv)
 			default:
 				printf("getopt returned character code 0%o?\n", c);
 		}
+	}
+	if (threads_num <= 0)
+	{
+		printf("Threads_num must be 1 or more. Now threads_num is %d\n", threads_num);
+		return -1;
 	}
 	/*
 	*  TODO:
@@ -177,6 +157,6 @@ int main(int argc, char **argv)
 	double elapsed_time = (finish_time.tv_usec - start_time.tv_usec) / 1000.0;
 	free(array);
 	printf("Total: %lld\n", total_sum);
-	printf("It took %fms milliseconds to find a sum\n", elapsed_time);
+	printf("It took %f milliseconds to find a sum\n", elapsed_time);
 	return 0;
 }

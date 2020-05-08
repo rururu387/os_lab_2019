@@ -35,6 +35,11 @@ void alarmHandler()
 	printf("Could not find minimum and maximum. Probably too big input data.");
 	//signal(SIGKILL, wait);
 	kill(0, SIGKILL);
+	wait(NULL);
+	//We must free space here
+	//We must call wait() here
+	//But i can't pass variables to free here
+	//And i can't pass amount of threads here
 	exit(1);
 }
 
