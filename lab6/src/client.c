@@ -142,7 +142,7 @@ int main(int argc, char **argv) {
         // TODO: your code here
         if(!ConvertStringToUI64(optarg, &k) || k <= 0)
         {
-          printf("Auchtung! K is invalid: %d", k);
+          printf("K is invalid: %d", k);
           return 1;
         }
         
@@ -152,7 +152,7 @@ int main(int argc, char **argv) {
         // TODO: your code here
         if(!ConvertStringToUI64(optarg, &mod) || mod <= 0)
         {
-          printf("Auchtung! Mod is invalid: %d", mod);
+          printf("Mod is invalid: %d", mod);
           return 1;
         }
         break;

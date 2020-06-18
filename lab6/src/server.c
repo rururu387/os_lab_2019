@@ -128,19 +128,21 @@ void parallelServerCreate()
       memcpy(&begin, from_client, sizeof(uint64_t));
       memcpy(&end, from_client + sizeof(uint64_t), sizeof(uint64_t));
       memcpy(&mod, from_client + 2 * sizeof(uint64_t), sizeof(uint64_t));
-      /*for (int i = 0; i < sizeof(uint64_t) * 3; i++)
-      {
-        printf("%d ", from_client[i]);
-      }*/
-      /*sscanf(from_client, "%" PRIu64, &begin);
-      sscanf(from_client + sizeof(uint64_t), "%" PRIu64, &end);
-      sscanf(from_client + (sizeof(uint64_t) * 2), "%" PRIu64, &mod);*/
+      
       fprintf(stdout, "Receive: %llu %llu %llu\n", begin, end, mod);
 
       struct FactorialArgs args[tnum];
       for (uint32_t i = 0; i < tnum; i++) {
+        uint64_t step = (end - begin) / tnum;
         args[i].begin = begin;
-        args[i].end = end;
+        if(i == tnum - 1)
+        {
+          args[i].end = end;
+        }
+        else
+        {
+          args[i].end = begin + step;
+        }
         args[i].mod = mod;
 
         if (pthread_create(&(threads[i]), NULL, (void*) ThreadFactorial, (void *)&args[i]))

@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <getopt.h>
 
 #define BUFSIZE 100
 #define SADDR struct sockaddr
@@ -17,7 +18,7 @@ int main(int argc, char *argv[]) {
   char buf[BUFSIZE];
   struct sockaddr_in servaddr;
   if (argc < 3) {
-    printf("Too few arguments \n");
+    printf("usage: client <IPaddress of server> <port>\n");
     exit(1);
   }
 
